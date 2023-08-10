@@ -5,4 +5,5 @@ parameters:
 
     paths:
         - app/
-    level: 9
+        - src/
+    level: 5

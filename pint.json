@@ -1,3 +1,83 @@
 {
-    "preset": "psr12"
+    "preset": "psr12",
+    "rules": {
+        "@PSR1": true,
+        "@PSR2": true,
+        "@Symfony": true,
+        "array_syntax": {
+            "syntax": "short"
+        },
+        "binary_operator_spaces": {
+            "default": "single_space",
+            "operators": {
+                "=>": "align_single_space_minimal"
+            }
+        },
+        "blank_line_after_opening_tag": true,
+        "blank_line_before_statement": true,
+        "compact_nullable_typehint": true,
+        "concat_space": {
+            "spacing": "one"
+        },
+        "declare_equal_normalize": {
+            "space": "single"
+        },
+        "explicit_string_variable": true,
+        "fully_qualified_strict_types": true,
+        "function_to_constant": true,
+        "increment_style": {
+            "style": "post"
+        },
+        "is_null": true,
+        "linebreak_after_opening_tag": true,
+        "logical_operators": true,
+        "new_with_braces": false,
+        "no_blank_lines_before_namespace": false,
+        "no_leading_import_slash": true,
+        "no_leading_namespace_whitespace": false,
+        "no_unused_imports": true,
+        "no_useless_else": true,
+        "ordered_class_elements": {
+            "order": [
+                "use_trait",
+                "constant_public",
+                "constant_protected",
+                "constant_private",
+                "property_public_static",
+                "property_protected_static",
+                "property_private_static",
+                "property_public",
+                "property_protected",
+                "property_private",
+                "construct",
+                "destruct",
+                "magic",
+                "phpunit",
+                "method_public",
+                "method_protected",
+                "method_private"
+            ],
+            "sort_algorithm": "none"
+        },
+        "ordered_imports": true,
+        "phpdoc_align": false,
+        "phpdoc_no_alias_tag": false,
+        "phpdoc_order": true,
+        "phpdoc_to_comment": false,
+        "phpdoc_var_annotation_correct_order": true,
+        "phpdoc_var_without_name": false,
+        "protected_to_private": false,
+        "psr_autoloading": false,
+        "random_api_migration": true,
+        "error_suppression": false,
+        "single_blank_line_before_namespace": false,
+        "strict_comparison": true,
+        "strict_param": false,
+        "yoda_style": false
+    },
+    "exclude": [
+        "node_modules",
+        "storage",
+        "vendor"
+    ]
 }
