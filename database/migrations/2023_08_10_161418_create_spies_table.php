@@ -19,6 +19,8 @@ return new class extends Migration {
             $table->date('birth_date');
             $table->date('death_date')->nullable();
             $table->timestamps();
+
+            $table->unique(['name', 'surname']);
         });
     }
 
