@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
+use Prosperty\Core\Common\Providers\CommonServiceProvider;
+use Prosperty\Core\Domain\Spy\Providers\SpyServiceProvider;
 
 return [
     /*
@@ -167,6 +169,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        CommonServiceProvider::class,
+        SpyServiceProvider::class,
     ])->toArray(),
 
     /*
