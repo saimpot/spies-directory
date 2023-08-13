@@ -2,11 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Prosperty\Core\Domain\Spy\Enums\Permission;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends Factory<User>
  */
 class UserFactory extends Factory
 {
@@ -26,13 +28,25 @@ class UserFactory extends Factory
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    public function unverified(): static
+    public function createAdminUser(): User
     {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
+        $attributes = [
+            User::COLUMN_NAME              => 'Admin',
+            User::COLUMN_EMAIL             => sprintf('admin@%s', env('APP_DOMAIN')),
+            User::COLUMN_EMAIL_VERIFIED_AT => now(),
+            User::COLUMN_PASSWORD          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+            User::COLUMN_REMEMBER_TOKEN    => Str::random(10),
+        ];
+
+        $user = $this->create($attributes);
+
+        $this->attachTokenToAdminUser($user);
+
+        return $user;
+    }
+
+    private function attachTokenToAdminUser(User $user): void
+    {
+        $user->createToken('spy-token', array_column(Permission::cases(), 'value'));
     }
 }

@@ -34,6 +34,7 @@
         "new_with_braces": false,
         "no_blank_lines_before_namespace": false,
         "no_leading_import_slash": true,
+        "global_namespace_import": false,
         "no_leading_namespace_whitespace": false,
         "no_unused_imports": true,
         "no_useless_else": true,
