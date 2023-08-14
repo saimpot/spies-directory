@@ -6,12 +6,14 @@ namespace App\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Prosperty\Core\Domain\Spy\ValueObjects\FullName;
 
 /**
  * App\Models\Spy.
@@ -25,6 +27,7 @@ use Illuminate\Support\Carbon;
  * @property string|null $death_date
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property-read FullName $full_name
  * @property-read DatabaseNotificationCollection<int, DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
  *
@@ -57,6 +60,7 @@ class Spy extends Model
     public const COLUMN_DEATH_DATE = 'death_date';
     public const COLUMN_CREATED_AT = 'created_at';
     public const COLUMN_UPDATED_AT = 'updated_at';
+    public const COLUMN_FULL_NAME = 'full_name';
 
     protected $table = 'spies';
 
@@ -74,4 +78,14 @@ class Spy extends Model
         self::COLUMN_CREATED_AT,
         self::COLUMN_UPDATED_AT,
     ];
+
+    protected function fullName(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => new FullName(
+                name: $this->name,
+                surname: $this->surname,
+            ),
+        );
+    }
 }

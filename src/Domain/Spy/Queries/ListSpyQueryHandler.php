@@ -17,6 +17,6 @@ class ListSpyQueryHandler extends QueryHandler
 
     public function handle(ListSpyQuery $query): CursorPaginator
     {
-        return $this->repository->fetchAllSpies($query->perPage);
+        return $this->repository->fetchAllSpies($query->sortingCriteria, $query->perPage);
     }
 }
