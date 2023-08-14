@@ -18,8 +18,8 @@ class SpyFactory extends Factory
             Spy::COLUMN_SURNAME              => fake()->lastName,
             Spy::COLUMN_AGENCY               => Arr::random(array_column(Agencies::cases(), 'value')),
             Spy::COLUMN_COUNTRY_OF_OPERATION => fake()->countryCode,
-            Spy::COLUMN_BIRTH_DATE           => fake()->date,
-            Spy::COLUMN_DEATH_DATE           => fake()->date,
+            Spy::COLUMN_BIRTH_DATE           => $birthDate = fake()->date,
+            Spy::COLUMN_DEATH_DATE           => fake()->dateTimeBetween($birthDate)->format('Y-m-d'),
         ];
     }
 }
