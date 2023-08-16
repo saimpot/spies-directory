@@ -30,8 +30,8 @@ class SpyCollectionController extends ApiController
             $this->bus->ask(
                 new ListSpyQuery(
                     new SortingCriteria(
-                        $request->get('sortBy'),
-                        $request->get('sortDirection')
+                        $request->get('sort'),
+                        $request->get('direction')
                     )
                 )
             )
