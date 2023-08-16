@@ -13,14 +13,14 @@ use Prosperty\Core\Domain\Spy\Resources\SpyResource;
 class SpyCreateController extends ApiController
 {
     public function __construct(
-        protected CommandBus $bus
+        protected CommandBus $commandBus
     ) {
     }
 
     public function __invoke(SpyCreateRequest $request): SpyResource
     {
         return new SpyResource(
-            $this->bus->dispatch(
+            $this->commandBus->dispatch(
                 new CreateSpyCommand(
                     ...$request->validated()
                 )

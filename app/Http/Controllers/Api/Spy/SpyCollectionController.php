@@ -15,19 +15,19 @@ use Prosperty\Core\Domain\Spy\ValueObjects\SortingCriteria;
 class SpyCollectionController extends ApiController
 {
     public function __construct(
-        protected QueryBus $bus
+        protected QueryBus $queryBus
     ) {
     }
 
     public function random(): SpyCollection
     {
-        return new SpyCollection($this->bus->ask(new ListSpyRandomQuery()));
+        return new SpyCollection($this->queryBus->ask(new ListSpyRandomQuery()));
     }
 
     public function all(Request $request): SpyCollection
     {
         return new SpyCollection(
-            $this->bus->ask(
+            $this->queryBus->ask(
                 new ListSpyQuery(
                     new SortingCriteria(
                         $request->get('sort'),
