@@ -17,7 +17,7 @@ class WriteSpyRepository implements WriteSpyRepositoryInterface
         ?Agency $agency,
         Country $countryOfOperation,
         Carbon $birthDate,
-        Carbon $deathDate
+        Carbon $deathDate = null
     ): Spy {
         return Spy::query()->create([
             'name'                 => $name,
