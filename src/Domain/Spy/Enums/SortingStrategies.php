@@ -6,11 +6,11 @@ namespace Prosperty\Core\Domain\Spy\Enums;
 
 use App\Models\Spy;
 use InvalidArgumentException;
-use Prosperty\Core\Domain\Spy\Strategies\BirthDateSortingStrategy;
-use Prosperty\Core\Domain\Spy\Strategies\DeathDateSortingStrategy;
-use Prosperty\Core\Domain\Spy\Strategies\FullNameSortingStrategy;
-use Prosperty\Core\Domain\Spy\Strategies\NameSortingStrategy;
-use Prosperty\Core\Domain\Spy\Strategies\SurnameSortingStrategy;
+use Prosperty\Core\Domain\Spy\Strategies\Sorting\BirthDateSortingStrategy;
+use Prosperty\Core\Domain\Spy\Strategies\Sorting\DeathDateSortingStrategy;
+use Prosperty\Core\Domain\Spy\Strategies\Sorting\FullNameSortingStrategy;
+use Prosperty\Core\Domain\Spy\Strategies\Sorting\NameSortingStrategy;
+use Prosperty\Core\Domain\Spy\Strategies\Sorting\SurnameSortingStrategy;
 
 enum SortingStrategies: string
 {
@@ -24,6 +24,17 @@ enum SortingStrategies: string
             Spy::COLUMN_DEATH_DATE => self::DeathDate,
             default                => throw new InvalidArgumentException("Invalid sorting strategy: {$strategy}"),
         };
+    }
+
+    public static function columns(): array
+    {
+        return [
+            Spy::COLUMN_SURNAME,
+            Spy::COLUMN_NAME,
+            Spy::COLUMN_FULL_NAME,
+            Spy::COLUMN_BIRTH_DATE,
+            Spy::COLUMN_DEATH_DATE,
+        ];
     }
 
     case Surname = SurnameSortingStrategy::class;
