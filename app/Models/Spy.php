@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Database\Factories\SpyFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -45,11 +46,11 @@ use Prosperty\Core\Domain\Spy\ValueObjects\FullName;
  * @method static Builder|Spy whereName($value)
  * @method static Builder|Spy whereSurname($value)
  * @method static Builder|Spy whereUpdatedAt($value)
+ * @method static Builder|Spy exactAge(int $age)
+ * @method static SpyFactory factory($count = null, $state = [])
+ * @method static Builder|Spy ageRange(int $minAge, int $maxAge)
  *
  * @mixin Eloquent
- *
- * @method static Builder|Spy exactAge(int $age)
- * @method static \Database\Factories\SpyFactory factory($count = null, $state = [])
  */
 class Spy extends Model
 {
@@ -85,7 +86,7 @@ class Spy extends Model
         self::COLUMN_UPDATED_AT,
     ];
 
-    public function scopeExactAge(Builder $query, int $age)
+    public function scopeExactAge(Builder $query, int $age): Builder
     {
         return $query->whereRaw(
             sprintf(
@@ -97,7 +98,7 @@ class Spy extends Model
         );
     }
 
-    public function scopeAgeRange(Builder $query, int $minAge, int $maxAge)
+    public function scopeAgeRange(Builder $query, int $minAge, int $maxAge): Builder
     {
         return $query->whereRaw(
             sprintf(

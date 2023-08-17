@@ -7,7 +7,6 @@ namespace Prosperty\Core\Domain\Spy\ValueObjects;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use InvalidArgumentException;
-use Prosperty\Core\Domain\Spy\Requests\SpyFilterRequest;
 use Prosperty\Core\Domain\Spy\Requests\SpySortRequest;
 
 class SortingCriteria
