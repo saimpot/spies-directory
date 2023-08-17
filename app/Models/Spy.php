@@ -13,6 +13,7 @@ use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Prosperty\Core\Domain\Spy\ValueObjects\Age;
 use Prosperty\Core\Domain\Spy\ValueObjects\FullName;
 
 /**
@@ -28,6 +29,7 @@ use Prosperty\Core\Domain\Spy\ValueObjects\FullName;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read FullName $full_name
+ * @property-read Age $age
  * @property-read DatabaseNotificationCollection<int, DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
  *
@@ -45,6 +47,9 @@ use Prosperty\Core\Domain\Spy\ValueObjects\FullName;
  * @method static Builder|Spy whereUpdatedAt($value)
  *
  * @mixin Eloquent
+ *
+ * @method static Builder|Spy exactAge(int $age)
+ * @method static \Database\Factories\SpyFactory factory($count = null, $state = [])
  */
 class Spy extends Model
 {
@@ -61,6 +66,7 @@ class Spy extends Model
     public const COLUMN_CREATED_AT = 'created_at';
     public const COLUMN_UPDATED_AT = 'updated_at';
     public const COLUMN_FULL_NAME = 'full_name';
+    public const COLUMN_AGE = 'age';
 
     protected $table = 'spies';
 
@@ -79,6 +85,31 @@ class Spy extends Model
         self::COLUMN_UPDATED_AT,
     ];
 
+    public function scopeExactAge(Builder $query, int $age)
+    {
+        return $query->whereRaw(
+            sprintf(
+                'TIMESTAMPDIFF(YEAR, %s, %s) = %d',
+                self::COLUMN_BIRTH_DATE,
+                self::COLUMN_DEATH_DATE ?? 'NOW()',
+                $age,
+            ),
+        );
+    }
+
+    public function scopeAgeRange(Builder $query, int $minAge, int $maxAge)
+    {
+        return $query->whereRaw(
+            sprintf(
+                'TIMESTAMPDIFF(YEAR, %s, %s) BETWEEN %d AND %d',
+                self::COLUMN_BIRTH_DATE,
+                self::COLUMN_DEATH_DATE ?? 'NOW()',
+                $minAge,
+                $maxAge,
+            ),
+        );
+    }
+
     protected function fullName(): Attribute
     {
         return Attribute::make(
@@ -86,6 +117,16 @@ class Spy extends Model
                 name: $this->name,
                 surname: $this->surname,
             ),
+        );
+    }
+
+    protected function age(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => new Age(
+                birthDate: Carbon::parse($this->birth_date),
+                deathDate: $this->death_date ? Carbon::parse($this->death_date) : null,
+            )
         );
     }
 }
