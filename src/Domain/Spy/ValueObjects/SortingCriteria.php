@@ -8,7 +8,13 @@ use InvalidArgumentException;
 
 class SortingCriteria
 {
-    protected array $acceptableDirections = ['asc', 'desc'];
+    protected const DIRECTION_ASC = 'asc';
+    protected const DIRECTION_DESC = 'desc';
+    protected const DEFAULT_DIRECTION = self::DIRECTION_ASC;
+    protected const ACCEPTABLE_DIRECTION = [
+        self::DIRECTION_ASC,
+        self::DIRECTION_DESC,
+    ];
 
     public function __construct(
         protected ?string $sortBy,
@@ -16,9 +22,9 @@ class SortingCriteria
     ) {
         if (
             $this->sortDirection
-            && !in_array($this->sortDirection, $this->acceptableDirections, true)
+            && !in_array(strtolower($this->sortDirection), self::ACCEPTABLE_DIRECTION, true)
         ) {
-            throw new InvalidArgumentException('Invalid sort direction');
+            throw new InvalidArgumentException("Invalid sorting direction: {$this->sortDirection}");
         }
     }
 
@@ -29,6 +35,6 @@ class SortingCriteria
 
     public function getSortDirection(): ?string
     {
-        return $this->sortDirection ?? $this->acceptableDirections[0];
+        return $this->sortDirection ?? self::DEFAULT_DIRECTION;
     }
 }
