@@ -5,7 +5,10 @@ declare(strict_types = 1);
 namespace Prosperty\Core\Domain\Spy\ValueObjects;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use InvalidArgumentException;
+use Prosperty\Core\Domain\Spy\Requests\SpyFilterRequest;
+use Prosperty\Core\Domain\Spy\Requests\SpySortRequest;
 
 class SortingCriteria
 {
@@ -24,6 +27,8 @@ class SortingCriteria
     public function __construct(
         protected Request $request,
     ) {
+        Validator::make($this->request->only(self::SORT_KEY, self::DIRECTION_KEY), app(SpySortRequest::class)->rules())->validate();
+
         if (
             $this->getSortDirection()
             && !in_array(strtolower($this->getSortDirection()), self::ACCEPTABLE_DIRECTION, true)
