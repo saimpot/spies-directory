@@ -7,6 +7,7 @@ namespace Prosperty\Core\Domain\Spy\Enums;
 enum Agencies: string
 {
     case AGENCY_FBI = 'FBI';
+    case AGENCY_MI6 = 'MI6';
     case AGENCY_CIA = 'CIA';
     case AGENCY_NSA = 'NSA';
     case AGENCY_DIA = 'DIA';
