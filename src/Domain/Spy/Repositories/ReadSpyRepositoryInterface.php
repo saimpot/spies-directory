@@ -6,6 +6,7 @@ namespace Prosperty\Core\Domain\Spy\Repositories;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\CursorPaginator;
+use Prosperty\Core\Domain\Spy\ValueObjects\FilteringCriteria;
 use Prosperty\Core\Domain\Spy\ValueObjects\SortingCriteria;
 
 interface ReadSpyRepositoryInterface
@@ -14,6 +15,7 @@ interface ReadSpyRepositoryInterface
 
     public function fetchAllSpies(
         SortingCriteria $sortingCriteria,
+        FilteringCriteria $filteringCriteria,
         int $perPage
     ): CursorPaginator;
 }

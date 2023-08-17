@@ -18,7 +18,8 @@ class SpyResource extends JsonResource
             Spy::COLUMN_COUNTRY_OF_OPERATION => $this->country_of_operation,
             Spy::COLUMN_BIRTH_DATE           => $this->birth_date,
             Spy::COLUMN_DEATH_DATE           => $this->death_date,
-            SPY::COLUMN_FULL_NAME            => $this->full_name->toNative(),
+            Spy::COLUMN_FULL_NAME            => $this->full_name->toNative(),
+            Spy::COLUMN_AGE                  => $this->age->toNative(),
         ];
     }
 }
