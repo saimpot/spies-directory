@@ -6,4 +6,5 @@ parameters:
     paths:
         - app/
         - src/
+        - tests/
     level: 5
