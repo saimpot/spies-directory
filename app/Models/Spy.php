@@ -86,6 +86,9 @@ class Spy extends Model
         self::COLUMN_UPDATED_AT,
     ];
 
+    /**
+     * @see exactAge
+     */
     public function scopeExactAge(Builder $query, int $age): Builder
     {
         return $query->whereRaw(
@@ -98,6 +101,9 @@ class Spy extends Model
         );
     }
 
+    /**
+     * @see ageRange
+     */
     public function scopeAgeRange(Builder $query, int $minAge, int $maxAge): Builder
     {
         return $query->whereRaw(

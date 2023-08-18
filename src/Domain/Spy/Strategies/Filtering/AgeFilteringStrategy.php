@@ -20,6 +20,7 @@ class AgeFilteringStrategy implements FilteringStrategyInterface
 
     private function filterExactAge(Builder $query, FilteringCriteria $criteria): Builder
     {
+        /** @var Spy $query */
         return $query->exactAge((int) $criteria->getFilters()[Spy::COLUMN_AGE]);
     }
 
@@ -27,6 +28,7 @@ class AgeFilteringStrategy implements FilteringStrategyInterface
     {
         [$minAge, $maxAge] = explode('-', $criteria->getFilters()[Spy::COLUMN_AGE]);
 
-        return $query->ageRange($minAge, $maxAge);
+        /** @var Spy $query */
+        return $query->ageRange((int) $minAge, (int) $maxAge);
     }
 }
