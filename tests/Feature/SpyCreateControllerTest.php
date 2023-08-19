@@ -7,6 +7,7 @@ namespace Feature;
 use App\Models\Spy;
 use Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Prosperty\Core\Domain\Spy\Enums\Permission;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
@@ -26,9 +27,9 @@ class SpyCreateControllerTest extends TestCase
     /**
      * @dataProvider spyDataProvider
      */
-    public function testValidSpyCreation(string $name, string $surname, string $deathDate = null): void
+    public function testValidSpyCreationWithVariableDeathDates(string $name, string $surname, string $deathDate = null): void
     {
-        $factory = $this->userFactory->createSpyCreateUser();
+        $factory = $this->userFactory->createApiUser(Permission::CREATE);
 
         $spyData = [
             'name'               => $name,
@@ -55,8 +56,173 @@ class SpyCreateControllerTest extends TestCase
             ],
         ]);
 
-        $this->assertDatabaseHas('spies', [Spy::COLUMN_NAME => $name, Spy::COLUMN_SURNAME => $surname, Spy::COLUMN_DEATH_DATE => $deathDate]);
-        $this->assertDatabaseCount('spies', 1);
+        $this->assertDatabaseHas(Spy::TABLE_NAME, [Spy::COLUMN_NAME => $name, Spy::COLUMN_SURNAME => $surname, Spy::COLUMN_DEATH_DATE => $deathDate]);
+        $this->assertDatabaseCount(Spy::TABLE_NAME, 1);
+    }
+
+    /**
+     * @dataProvider invalidSpyDataProvider
+     */
+    public function testInvalidSpyDataCreation(array $spyData, string $expectedErrorField): void
+    {
+        $factory = $this->userFactory->createApiUser(Permission::CREATE);
+        $response = $this->withToken($factory['token'])->postJson('/api/spy', $spyData);
+
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+        $response->assertJsonValidationErrors($expectedErrorField);
+
+        $this->assertDatabaseCount(Spy::TABLE_NAME, 0);
+    }
+
+    /**
+     * Provide data for testInvalidSpyCreation.
+     */
+    public static function invalidSpyDataProvider(): array
+    {
+        return [
+            'Missing name' => [
+                'spyData' => [
+                    'surname'            => 'Bond',
+                    'agency'             => 'MI6',
+                    'countryOfOperation' => 'UK',
+                    'birthDate'          => '1962-01-01',
+                    'deathDate'          => null,
+                ],
+                'expectedErrorField' => 'name',
+            ],
+            'Missing surname' => [
+                'spyData' => [
+                    'name'               => 'James',
+                    'agency'             => 'MI6',
+                    'countryOfOperation' => 'UK',
+                    'birthDate'          => '1962-01-01',
+                    'deathDate'          => null,
+                ],
+                'expectedErrorField' => 'surname',
+            ],
+            'Missing countryOfOperation' => [
+                'spyData' => [
+                    'name'      => 'James',
+                    'surname'   => 'Bond',
+                    'agency'    => 'MI6',
+                    'birthDate' => '1962-01-01',
+                    'deathDate' => null,
+                ],
+                'expectedErrorField' => 'countryOfOperation',
+            ],
+            'Missing birthDate' => [
+                'spyData' => [
+                    'name'               => 'James',
+                    'surname'            => 'Bond',
+                    'agency'             => 'MI6',
+                    'countryOfOperation' => 'UK',
+                    'deathDate'          => null,
+                ],
+                'expectedErrorField' => 'birthDate',
+            ],
+            'Empty name' => [
+                'spyData' => [
+                    'name'               => null,
+                    'surname'            => 'Bond',
+                    'agency'             => 'MI6',
+                    'countryOfOperation' => 'UK',
+                    'birthDate'          => '1962-01-01',
+                    'deathDate'          => null,
+                ],
+                'expectedErrorField' => 'name',
+            ],
+            'Empty surname' => [
+                'spyData' => [
+                    'name'               => 'James',
+                    'surname'            => null,
+                    'agency'             => 'MI6',
+                    'countryOfOperation' => 'UK',
+                    'birthDate'          => '1962-01-01',
+                    'deathDate'          => null,
+                ],
+                'expectedErrorField' => 'surname',
+            ],
+            'Empty countryOfOperation' => [
+                'spyData' => [
+                    'name'               => 'James',
+                    'surname'            => 'Bond',
+                    'agency'             => 'MI6',
+                    'countryOfOperation' => null,
+                    'birthDate'          => '1962-01-01',
+                    'deathDate'          => null,
+                ],
+                'expectedErrorField' => 'countryOfOperation',
+            ],
+            'Empty birthDate' => [
+                'spyData' => [
+                    'name'               => 'James',
+                    'surname'            => 'Bond',
+                    'agency'             => 'MI6',
+                    'countryOfOperation' => 'UK',
+                    'birthDate'          => null,
+                    'deathDate'          => null,
+                ],
+                'expectedErrorField' => 'birthDate',
+            ],
+            'Invalid agency' => [
+                'spyData' => [
+                    'name'               => 'James',
+                    'surname'            => 'Bond',
+                    'agency'             => 'TOTALLY_INVALID_AGENCY',
+                    'countryOfOperation' => 'UK',
+                    'birthDate'          => '1962-01-01',
+                    'deathDate'          => null,
+                ],
+                'expectedErrorField' => 'agency',
+            ],
+
+            'Birth date after death date' => [
+                'spyData' => [
+                    'name'               => 'James',
+                    'surname'            => 'Bond',
+                    'agency'             => 'MI6',
+                    'countryOfOperation' => 'UK',
+                    'birthDate'          => '1996-01-01',
+                    'deathDate'          => '1995-11-17',
+                ],
+                'expectedErrorField' => 'deathDate',
+            ],
+
+            'Future birth date' => [
+                'spyData' => [
+                    'name'               => 'James',
+                    'surname'            => 'Bond',
+                    'agency'             => 'MI6',
+                    'countryOfOperation' => 'UK',
+                    'birthDate'          => '2100-01-01', // Future date
+                    'deathDate'          => null,
+                ],
+                'expectedErrorField' => 'birthDate',
+            ],
+            'Future death date' => [
+                'spyData' => [
+                    'name'               => 'James',
+                    'surname'            => 'Bond',
+                    'agency'             => 'MI6',
+                    'countryOfOperation' => 'UK',
+                    'birthDate'          => '1962-01-01',
+                    'deathDate'          => '2100-11-17',
+                ],
+                'expectedErrorField' => 'deathDate',
+            ],
+
+            'Non-existing agency' => [
+                'spyData' => [
+                    'name'               => 'James',
+                    'surname'            => 'Bond',
+                    'agency'             => 'NOT_EXISTING_AGENCY',
+                    'countryOfOperation' => 'UK',
+                    'birthDate'          => '1962-01-01',
+                    'deathDate'          => null,
+                ],
+                'expectedErrorField' => 'agency',
+            ],
+        ];
     }
 
     /**
