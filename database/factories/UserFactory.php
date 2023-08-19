@@ -28,7 +28,7 @@ class UserFactory extends Factory
         ];
     }
 
-    public function createAdminUser(): User
+    public function createAdminUser(): array
     {
         $attributes = [
             User::COLUMN_NAME              => 'Admin',
@@ -40,9 +40,9 @@ class UserFactory extends Factory
 
         $user = $this->create($attributes);
 
-        $this->attachTokenToAdminUser($user);
+        $token = $this->attachTokenToAdminUser($user);
 
-        return $user;
+        return ['user' => $user, 'token' => $token];
     }
 
     public function createApiUser(Permission $permission): array
@@ -62,9 +62,9 @@ class UserFactory extends Factory
         return ['user' => $user, 'token' => $token];
     }
 
-    private function attachTokenToAdminUser(User $user): void
+    private function attachTokenToAdminUser(User $user): string
     {
-        $user->createToken('spy-token', array_column(Permission::cases(), 'value'));
+        return $user->createToken('spy-token', array_column(Permission::cases(), 'value'))->plainTextToken;
     }
 
     private function attachTokenWithPermissionToUser(User $user, string $permission): string
