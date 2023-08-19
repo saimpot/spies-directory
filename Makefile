@@ -59,6 +59,9 @@ clear-laravel-cache: print-separator
 	docker exec -it spies-directory-app-container php artisan cache:clear
 	@echo "___Cache cleared!"
 
-setup-project: create-certs install-composer-pkgs copy-env generate-key migrate-db seed-db set-permissions clear-composer-cache clear-config-cache clear-laravel-cache
+test:
+	@echo "___Starting the test suite..."
+	docker exec -it spies-directory-app-container php artisan test
+	@echo "___Tests done!"
 
-.PHONY: print-separator create-certs remove-certs install-composer-pkgs copy-env generate-key migrate-db seed-db set-permissions clear-composer-cache clear-config-cache clear-laravel-cache setup-project
+setup-project: install-composer-pkgs copy-env generate-key migrate-db seed-db set-permissions clear-composer-cache clear-config-cache clear-laravel-cache
