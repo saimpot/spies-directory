@@ -45,11 +45,11 @@ class UserFactory extends Factory
         return $user;
     }
 
-    public function createSpyCreateUser(): array
+    public function createApiUser(Permission $permission): array
     {
         $attributes = [
-            User::COLUMN_NAME              => 'Spy Creator',
-            User::COLUMN_EMAIL             => sprintf('spy-creator@%s', env('APP_DOMAIN')),
+            User::COLUMN_NAME              => "Api {$permission->value} user",
+            User::COLUMN_EMAIL             => sprintf('spy-%s-user@%s', $permission->value, env('APP_DOMAIN')),
             User::COLUMN_EMAIL_VERIFIED_AT => now(),
             User::COLUMN_PASSWORD          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             User::COLUMN_REMEMBER_TOKEN    => Str::random(10),
@@ -57,7 +57,7 @@ class UserFactory extends Factory
 
         $user = $this->create($attributes);
 
-        $token = $this->attachTokenWithPermissionToUser($user, Permission::CREATE->value);
+        $token = $this->attachTokenWithPermissionToUser($user, $permission->value);
 
         return ['user' => $user, 'token' => $token];
     }
