@@ -45,8 +45,30 @@ class UserFactory extends Factory
         return ['user' => $user, 'token' => $token];
     }
 
+    public function createApiUser(Permission $permission): array
+    {
+        $attributes = [
+            User::COLUMN_NAME              => "Api {$permission->value} user",
+            User::COLUMN_EMAIL             => sprintf('spy-%s-user@%s', $permission->value, env('APP_DOMAIN')),
+            User::COLUMN_EMAIL_VERIFIED_AT => now(),
+            User::COLUMN_PASSWORD          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+            User::COLUMN_REMEMBER_TOKEN    => Str::random(10),
+        ];
+
+        $user = $this->create($attributes);
+
+        $token = $this->attachTokenWithPermissionToUser($user, $permission->value);
+
+        return ['user' => $user, 'token' => $token];
+    }
+
     private function attachTokenToAdminUser(User $user): string
     {
         return $user->createToken('spy-token', array_column(Permission::cases(), 'value'))->plainTextToken;
+    }
+
+    private function attachTokenWithPermissionToUser(User $user, string $permission): string
+    {
+        return $user->createToken('spy-token', [$permission])->plainTextToken;
     }
 }

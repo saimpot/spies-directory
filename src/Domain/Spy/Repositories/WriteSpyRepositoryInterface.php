@@ -17,6 +17,6 @@ interface WriteSpyRepositoryInterface
         Agency $agency,
         Country $countryOfOperation,
         Carbon $birthDate,
-        Carbon $deathDate,
+        Carbon $deathDate = null,
     ): Spy;
 }

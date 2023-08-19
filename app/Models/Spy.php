@@ -57,6 +57,7 @@ class Spy extends Model
     use HasFactory;
     use Notifiable;
 
+    public const TABLE_NAME = 'spies';
     public const COLUMN_ID = 'id';
     public const COLUMN_NAME = 'name';
     public const COLUMN_SURNAME = 'surname';
@@ -69,7 +70,7 @@ class Spy extends Model
     public const COLUMN_FULL_NAME = 'full_name';
     public const COLUMN_AGE = 'age';
 
-    protected $table = 'spies';
+    protected $table = self::TABLE_NAME;
 
     protected $fillable = [
         self::COLUMN_NAME,
@@ -86,6 +87,9 @@ class Spy extends Model
         self::COLUMN_UPDATED_AT,
     ];
 
+    /**
+     * @see exactAge
+     */
     public function scopeExactAge(Builder $query, int $age): Builder
     {
         return $query->whereRaw(
@@ -98,6 +102,9 @@ class Spy extends Model
         );
     }
 
+    /**
+     * @see ageRange
+     */
     public function scopeAgeRange(Builder $query, int $minAge, int $maxAge): Builder
     {
         return $query->whereRaw(

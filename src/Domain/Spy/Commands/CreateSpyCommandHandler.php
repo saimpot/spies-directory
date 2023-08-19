@@ -26,7 +26,7 @@ class CreateSpyCommandHandler extends CommandHandler
             Agency::fromString($command->agency),
             Country::fromString($command->countryOfOperation),
             Carbon::parse($command->birthDate),
-            Carbon::parse($command->deathDate),
+            $command->deathDate ? Carbon::parse($command->deathDate) : null,
         );
     }
 }
