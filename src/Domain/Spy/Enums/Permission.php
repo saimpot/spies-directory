@@ -13,4 +13,14 @@ enum Permission: string
     case FULL_WRITE_PERMISSION = 'spy:full-write-permission';
     case FULL_READ_PERMISSION = 'spy:full-read-permission';
     case FULL_PERMISSION = 'spy:full-permission';
+
+    public static function toArray(): array {
+        $result = [];
+
+        foreach (self::cases() as $case) {
+            $result[$case->name] = $case->value;
+        }
+
+        return $result;
+    }
 }
