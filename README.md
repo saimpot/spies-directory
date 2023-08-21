@@ -67,6 +67,16 @@ modify data.
 
 ### Steps:
 
+0. **Edit Hosts File** 🖊️:
+
+    Open your `/etc/hosts` file with elevated privileges in your favorite editor (e.g. `sudo nano /etc/hosts`). Then add the following line to the 
+   file:
+    
+    `127.0.0.1   spd.test`
+    
+    Save and close the editor (`Ctrl+X, followed by Y` in the case of nano. This ensures the application's domain resolves correctly in your local 
+   environment.
+
 1. **Clone the repository**:
    
     `cd ~/Projects`
