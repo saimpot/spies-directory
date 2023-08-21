@@ -72,9 +72,8 @@ class SpyCreateControllerTest extends FeatureTestCase
         $this->assertDatabaseCount(Spy::TABLE_NAME, 0);
     }
 
-
     /**
-    * @dataProvider wrongPermissionsDataProvider
+     * @dataProvider wrongPermissionsDataProvider
      */
     public function testUserWithWrongPermissionsCannotCreateSpy(Permission $permission): void
     {
