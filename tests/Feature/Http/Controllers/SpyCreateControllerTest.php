@@ -2,27 +2,17 @@
 
 declare(strict_types = 1);
 
-namespace Feature;
+namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Spy;
-use Database\Factories\UserFactory;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Arr;
 use Prosperty\Core\Domain\Spy\Enums\Permission;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\TestCase;
+use Tests\Feature\FeatureTestCase;
 
-class SpyCreateControllerTest extends TestCase
+class SpyCreateControllerTest extends FeatureTestCase
 {
-    use RefreshDatabase;
-
-    protected UserFactory $userFactory;
-
-    protected function setUp(
-    ): void {
-        parent::setUp();
-
-        $this->userFactory = new UserFactory();
-    }
+    // @TODO: DRY this up
 
     /**
      * @dataProvider spyDataProvider
@@ -72,6 +62,32 @@ class SpyCreateControllerTest extends TestCase
         $response->assertJsonValidationErrors($expectedErrorField);
 
         $this->assertDatabaseCount(Spy::TABLE_NAME, 0);
+    }
+
+    public function testUnauthorizedUserCannotCreateSpy(): void
+    {
+        $response = $this->postJson('/api/spy', []);
+
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
+        $this->assertDatabaseCount(Spy::TABLE_NAME, 0);
+    }
+
+
+    /**
+    * @dataProvider wrongPermissionsDataProvider
+     */
+    public function testUserWithWrongPermissionsCannotCreateSpy(Permission $permission): void
+    {
+        $factory = $this->userFactory->createApiUser($permission);
+        $response = $this->withToken($factory['token'])->postJson('/api/spy');
+
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
+        $this->assertDatabaseCount(Spy::TABLE_NAME, 0);
+    }
+
+    public static function wrongPermissionsDataProvider(): array
+    {
+        return Arr::except([Permission::cases()], [Permission::CREATE]);
     }
 
     /**
