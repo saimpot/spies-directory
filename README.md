@@ -14,7 +14,7 @@ Absolutely! Here's an expanded version of the sections you've highlighted:
 
 **PHP**: The server-side scripting language that powers Laravel. Known for its versatility and strong community support.
 
-**Nginx**: A high-performance web server software that is also used as a reverse proxy. It's known for its stability, simplicity, and efficient resource management.
+**Nginx**: A high-performance web server software also used as a reverse proxy. It's known for its stability, simplicity, and efficient resource management.
 
 **Laravel**: A PHP framework that facilitates quick development cycles and robust feature sets. Its expressive syntax emphasizes clarity and readability.
 
@@ -24,23 +24,28 @@ Absolutely! Here's an expanded version of the sections you've highlighted:
 
 ### 💡Architecture - Why DDD?
 
-For this project, I've chosen Domain-Driven Design (DDD). While it might seem overkill for a small project like this, DDD is a way to showcase Laravel and architectural expertise. Here's why:
--   **Modeling Complex Logic**: Even though this project isn't sprawling, DDD shines in modeling complex domain logic and business rules.
--   **Scalability**: Should the project ever grow, having a DDD structure makes it easier to scale and expand upon without running into as many 
-architectural issues.
--   **Ubiquitous Language**: DDD encourages the use of a common language between developers and stakeholders. This means code reflects the business 
-domain closely, leading to fewer misunderstandings.
+For this project, I've chosen Domain-Driven Design (DDD). While it might seem overkill for a small project like this, DDD is an excellent way to 
+demonstrate the combination of Laravel and architectural design. Here's why:
+-   **Modeling Complex Logic**: DDD shines in modeling complex domain logic and business rules, even if this project isn't extensive.
+-   **Scalability**: If the project grows, a DDD structure facilitates easier scaling and expansion without many architectural challenges.
+-   **Ubiquitous Language**: DDD encourages using a shared language between developers and stakeholders, meaning the code mirrors the business domain, leading to fewer misunderstandings.
 -   **Separation of Concerns**: By separating the domain, application, and infrastructure layers, DDD promotes a clean architecture, where business 
-logic is distinct from the framework and other concerns.
+logic is separated from the framework and other concerns.
 
 
 ### 🤔 Why both App and Src folders exist
 
 The existence of both `App` and `Src` directories serves a specific purpose:
 
--   `App` Folder: This folder typically contains boilerplate Laravel code and components that are tightly coupled to the Laravel framework. Things like HTTP controllers, service providers, and middleware usually reside here.
+-   `App` Folder: Contains boilerplate Laravel code and components tightly coupled to the Laravel framework. Elements like HTTP controllers, service providers, and middleware typically reside here.
 
--   `Src` Folder: In the context of DDD, the `Src` directory contains the core domain logic of the application, segregated from any framework-specific implementations. Here, you'll find entities, value objects, and other domain-related logic, ensuring they remain decoupled from the Laravel framework.
+-   `Src` Folder: Folder: In the context of DDD, this directory houses the core domain logic of the application, keeping it separate from any 
+    framework-specific implementations. You'll find entities, value objects, and other domain-related logic here. 
+
+    - ⚠️ Although the purpose here is 
+        for the domain to stay framework-agnostic, I've made an exception for this project because the domain is so small and the objective was to 
+        write this in Laravel. Ideally, the domain would be framework-agnostic, and the framework-specific code would reside in the `App` folder. At 
+        least, that's how I envision a DDD approach to a Laravel project.
 
 
 Having this distinction enforces a cleaner separation between framework-specific code and the core business logic, allowing for easier testing and potential future transitions or rewrites.
@@ -48,12 +53,10 @@ Having this distinction enforces a cleaner separation between framework-specific
 ### 🤔 Why Patterns?
 
 **CQRS (Command Query Responsibility Segregation)**: Even for a small project, there are benefits to using CQRS:
--   **Separation of Concerns**: By segregating modification commands from read queries, it ensures that the read model can be optimized independently 
-of the write model.
--   **Flexibility**: CQRS allows for separate scaling of the read and write parts of the application. If, in the future, the application needs to 
-handle a high number of read operations but fewer write operations, the read model can be scaled without affecting the write model.
--   **Event Sourcing Compatibility**: CQRS pairs well with event sourcing. While not implemented here, if the project ever pivots in that direction, 
-having CQRS already in place eases the transition.
+-   **Separation of Concerns**: By separating modification commands from read queries, the read model can be independently optimized from the write model.
+-   **Flexibility**: CQRS allows the read and write parts of the application to scale separately. If the app needs to handle many read operations but fewer write operations in the future, the read model can be scaled without impacting the write model.
+-   **Event Sourcing Compatibility**: CQRS pairs well with event sourcing. While not implemented here, if the project ever moves in that direction, 
+having CQRS already in place simplifies the transition greatly and ensures a solid base for the developers to built onto.
 -   **Improved Security**: With separate models for reading and writing, it becomes easier to add specific security measures for operations that 
 modify data.
 
@@ -69,10 +72,11 @@ modify data.
 
 0. **Edit Hosts File** 🖊️:
 
-    Open your `/etc/hosts` file with elevated privileges in your favorite editor (e.g. `sudo nano /etc/hosts`). Then add the following line to the 
-   file:
-    
-    `127.0.0.1   spd.test`
+    Open your `/etc/hosts` file with elevated permissions in your preferred editor (e.g. for nano `sudo nano /etc/hosts`, for vim `sudo vim 
+   /etc/hosts`. Also friendly tip to avoid situations like [these](https://www.reddit.com/media?url=https%3A%2F%2Fi.redd.it%2Fauqmgt4b8zm11.png): 
+   press `shift+q` and type `q!` and then hit enter! 😍). 
+
+   Then add    the    following   line to the    file: `127.0.0.1   spd.test`
     
     Save and close the editor (`Ctrl+X, followed by Y` in the case of nano. This ensures the application's domain resolves correctly in your local 
    environment.
@@ -106,12 +110,22 @@ modify data.
 
 
 
-5. **API Token for Postman**: After the database seeding step during the setup, an API token will be generated. Copy this token and replace the `{{ token }}` variable in your Postman collection/environment with this token.
+5. ~~**API Token for Postman**: After the database seeding step during the setup, an API token will be generated. Copy this token and replace the `{
+   { token }}` variable in your Postman collection/environment with this token.~~
+
+    **The setup command now does this automatically for you, so you don't have to worry about it!** 🎉
 
 
 6. **Import postman**:
     
-    Import postman collection located in the root of the project `prosperty-postman.json`
+    - Import Postman environment file located in `root/storage/app/postman/postman_environment.json` to postman by clicking on `Environments` then on 
+      the button labeled `Import` near `New`. 
+    - Import Postman collection filed located in `root/storage/app/postman/postman_collection.json` to postman by click on `Collections` then on the 
+      button labeled `Import` near `New`.
+    - Use the new environment file by clicking on the eye icon near the environment name and selecting the new environment. Name is most likely 
+      `Prosperty - Assignment`.
+    - You should now have 1 (or more?) collection named `Prosperty - Spy directory` and 1 (or more?) environment named `Prosperty - Assignment`. 
+      Hooray! 🎉
 
 
 7. **Test**:
@@ -119,6 +133,6 @@ modify data.
     Run the test suite to make sure everything is working: `make test`
 
 
-8. **Enjoy!**:
+8. **Enjoy!** 🍔:
     
     Open postman and hit the actual API. 
