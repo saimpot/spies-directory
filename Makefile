@@ -68,4 +68,3 @@ test:
 	@echo "___Tests done!"
 
 setup-project: install-composer-pkgs copy-env generate-key migrate-db seed-db set-permissions clear-composer-cache clear-config-cache clear-laravel-cache
-bb: migrate-db seed-db
