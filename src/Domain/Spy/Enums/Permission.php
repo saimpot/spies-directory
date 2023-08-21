@@ -6,6 +6,16 @@ namespace Prosperty\Core\Domain\Spy\Enums;
 
 enum Permission: string
 {
+    public static function toArray(): array
+    {
+        $result = [];
+
+        foreach (self::cases() as $case) {
+            $result[$case->name] = $case->value;
+        }
+
+        return $result;
+    }
     case CREATE = 'spy:create';
     case RETRIEVE = 'spy:retrieve';
     case RETRIEVE_RANDOM = 'spy:retrieve-random-collection';
