@@ -1,0 +1,1050 @@
+{
+	"info": {
+		"_postman_id": "afe75884-7697-41c7-ae4e-9cb57040a9ca",
+		"name": "Prosperty - Spy directory",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2630223"
+	},
+	"item": [
+		{
+			"name": "Create spy",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 4|dI9cysoXszeCwU9J8XILZpwfnaWQr7mICe7WHeoa",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"James\",\n    \"surname\": \"Bond\",\n    \"agency\": \"MI6\",\n    \"countryOfOperation\": \"UK\",\n    \"birthDate\": \"1984-01-02\",\n    \"deathDate\": \"2001-02-04\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/spy",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"spy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get 5 random spies",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 4|dI9cysoXszeCwU9J8XILZpwfnaWQr7mICe7WHeoa",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/spy/random",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"spy",
+						"random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All spies",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 4|dI9cysoXszeCwU9J8XILZpwfnaWQr7mICe7WHeoa",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/spy",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"spy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All spies (s: surname)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 4|dI9cysoXszeCwU9J8XILZpwfnaWQr7mICe7WHeoa",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/spy?sort=surname",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"spy"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "surname"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All spies (s: name)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 4|dI9cysoXszeCwU9J8XILZpwfnaWQr7mICe7WHeoa",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/spy?sort=name",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"spy"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "name"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All spies (s: full_name)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 4|dI9cysoXszeCwU9J8XILZpwfnaWQr7mICe7WHeoa",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/spy?sort=full_name",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"spy"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "full_name"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All spies (s: birth_date)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 4|dI9cysoXszeCwU9J8XILZpwfnaWQr7mICe7WHeoa",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/spy?sort=birth_date",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"spy"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "birth_date"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All spies (s: death_date)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 4|dI9cysoXszeCwU9J8XILZpwfnaWQr7mICe7WHeoa",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/spy?sort=death_date",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"spy"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "death_date"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All spies (s: all sorts, desc)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 4|dI9cysoXszeCwU9J8XILZpwfnaWQr7mICe7WHeoa",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/spy?sort=name,surname,full_name,birth_date,death_date&direction=desc",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"spy"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "name,surname,full_name,birth_date,death_date"
+						},
+						{
+							"key": "direction",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All spies (s: invalid sort)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 4|dI9cysoXszeCwU9J8XILZpwfnaWQr7mICe7WHeoa",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/spy?sort=invalid_sort",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"spy"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "invalid_sort"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All spies (d: invalid direction)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 4|dI9cysoXszeCwU9J8XILZpwfnaWQr7mICe7WHeoa",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/spy?direction=descending",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"spy"
+					],
+					"query": [
+						{
+							"key": "direction",
+							"value": "descending"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All spies (f: name)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 4|dI9cysoXszeCwU9J8XILZpwfnaWQr7mICe7WHeoa",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/spy?name=James",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"spy"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "James"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All spies (f: surname)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 4|dI9cysoXszeCwU9J8XILZpwfnaWQr7mICe7WHeoa",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/spy?surname=Bond",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"spy"
+					],
+					"query": [
+						{
+							"key": "surname",
+							"value": "Bond"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All spies (f: age, exact)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 4|dI9cysoXszeCwU9J8XILZpwfnaWQr7mICe7WHeoa",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/spy?age=33",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"spy"
+					],
+					"query": [
+						{
+							"key": "age",
+							"value": "33"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All spies (f: age, range)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 4|dI9cysoXszeCwU9J8XILZpwfnaWQr7mICe7WHeoa",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/spy?age=41-55",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"spy"
+					],
+					"query": [
+						{
+							"key": "age",
+							"value": "41-55"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All spies (f: country)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 4|dI9cysoXszeCwU9J8XILZpwfnaWQr7mICe7WHeoa",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/spy?country_of_operation=UK",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"spy"
+					],
+					"query": [
+						{
+							"key": "country_of_operation",
+							"value": "UK"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All spies (f: invalid_filter)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 4|dI9cysoXszeCwU9J8XILZpwfnaWQr7mICe7WHeoa",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/spy?filter=asdf&age=35",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"spy"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "asdf"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All spies (combined s and f)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 4|dI9cysoXszeCwU9J8XILZpwfnaWQr7mICe7WHeoa",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/spy?name=James&sort=surname&direction=desc",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"spy"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "James"
+						},
+						{
+							"key": "sort",
+							"value": "surname"
+						},
+						{
+							"key": "direction",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
