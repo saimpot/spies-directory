@@ -143,6 +143,10 @@ Given more time and resources, there are endless possibilities to improve and ex
 
 ### 💻 Coding/Software Engineering Perspective:
 
+- Introduce a new domain bounded context called Postman and have a full postman API implementation to build, through postman's API, the 
+  creation/import of the .json files for the collection, and really automate the whole process more than it's already been automated, with just 
+  the use of an API key. 
+
 - Refactoring and Optimization: While the current architecture is solid, with more time, the codebase could be further refined to ensure maximum 
 efficiency and reduce potential technical debt.
 
