@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 use Prosperty\Core\Domain\Spy\Enums\Permission;
@@ -12,7 +13,7 @@ use Prosperty\Core\Domain\Spy\Enums\Permission;
 class CreateApiUser extends Command
 {
     protected $signature = 'api:create-user {name} {email}';
-    protected $description = 'Create a user for the API.';
+    protected $description = 'Create a user for the API, with a token attached.';
 
     public function handle(): int
     {
@@ -32,10 +33,14 @@ class CreateApiUser extends Command
                     User::COLUMN_EMAIL => $email,
                 ]);
 
-                $this->displayTokenInformation($user);
+                $token = $this->displayTokenInformation($user);
 
                 if (!$this->confirm('Have you copied the token?')) {
                     throw new InvalidArgumentException('User creation rolled back. You did not confirm the token copy.');
+                }
+
+                if ($this->confirm(sprintf('Do you want to automatically insert the token to %s?', UpdatePostmanEnvironment::FILE_PATH))) {
+                    Artisan::call('postman:env:update', ['token' => $token]);
                 }
 
                 $this->info("User created: {$user->name} {$user->email}");
@@ -49,11 +54,13 @@ class CreateApiUser extends Command
         }
     }
 
-    private function displayTokenInformation(User $user): void
+    private function displayTokenInformation(User $user): string
     {
         $token = $user->createToken('spy-token', array_column(Permission::cases(), 'value'));
 
         $this->info('API Token created. You should copy the following line (token) and use it to authenticate with the API.');
         $this->newLine()->info($token->plainTextToken);
+
+        return $token->plainTextToken;
     }
 }
