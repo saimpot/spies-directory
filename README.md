@@ -5,9 +5,6 @@
 This project is the implementation of the Backend Developer Coding Challenge by [Prosperty](https://www.theprosperty.com/), which is a directory of (famous) spies, by the candidate [George Chatzipavlou](https://github.com/saimpot).
 
 
-
-Absolutely! Here's an expanded version of the sections you've highlighted:
-
 ----------
 
 ### 🖥️ Stack
