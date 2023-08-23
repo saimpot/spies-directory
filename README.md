@@ -7,7 +7,7 @@ This project is the implementation of the Backend Developer Coding Challenge by 
 
 ----------
 
-### 🖥️ Stack
+## 🖥️ Stack
 
 **PHP**: The server-side scripting language that powers Laravel. Known for its versatility and strong community support.
 
@@ -19,7 +19,9 @@ This project is the implementation of the Backend Developer Coding Challenge by 
 
 **Redis**: An in-memory key-value store, used for caching and session storage. It helps speed up Laravel applications by providing a faster alternative to file or database-based caching.
 
-### 💡Architecture - Why DDD?
+## 💡Architecture
+
+### Why DDD?
 
 For this project, I've chosen Domain-Driven Design (DDD). While it might seem overkill for a small project like this, DDD is an excellent way to 
 demonstrate the combination of Laravel and architectural design. Here's why:
@@ -47,7 +49,7 @@ The existence of both `App` and `Src` directories serves a specific purpose:
 
 Having this distinction enforces a cleaner separation between framework-specific code and the core business logic, allowing for easier testing and potential future transitions or rewrites.
 
-### 🤔 Why Patterns?
+### 🤔 Patterns
 
 **CQRS (Command Query Responsibility Segregation)**: Even for a small project, there are benefits to using CQRS:
 -   **Separation of Concerns**: By separating modification commands from read queries, the read model can be independently optimized from the write model.
