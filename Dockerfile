@@ -9,6 +9,10 @@ RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && locale-gen
 # Install extensions
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install gd pdo pdo_mysql mbstring zip exif pcntl bcmath
 
+# Install pcov
+RUN pecl install pcov && \
+    docker-php-ext-enable pcov
+
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
