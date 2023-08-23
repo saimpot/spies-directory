@@ -14,6 +14,8 @@ use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Prosperty\Core\Domain\Spy\Casts\AgeCast;
+use Prosperty\Core\Domain\Spy\Casts\FullNameCast;
 use Prosperty\Core\Domain\Spy\ValueObjects\Age;
 use Prosperty\Core\Domain\Spy\ValueObjects\FullName;
 
@@ -65,8 +67,8 @@ class Spy extends Model
     public const COLUMN_COUNTRY_OF_OPERATION = 'country_of_operation';
     public const COLUMN_BIRTH_DATE = 'birth_date';
     public const COLUMN_DEATH_DATE = 'death_date';
-    public const COLUMN_CREATED_AT = 'created_at';
-    public const COLUMN_UPDATED_AT = 'updated_at';
+    public const COLUMN_CREATED_AT = self::CREATED_AT;
+    public const COLUMN_UPDATED_AT = self::UPDATED_AT;
     public const COLUMN_FULL_NAME = 'full_name';
     public const COLUMN_AGE = 'age';
 
@@ -82,6 +84,22 @@ class Spy extends Model
     ];
 
     protected $guarded = [
+        self::COLUMN_ID,
+        self::COLUMN_CREATED_AT,
+        self::COLUMN_UPDATED_AT,
+    ];
+
+    protected $appends = [
+        self::COLUMN_FULL_NAME,
+        self::COLUMN_AGE,
+    ];
+
+    protected $casts = [
+        self::COLUMN_FULL_NAME => FullNameCast::class,
+        self::COLUMN_AGE => AgeCast::class,
+    ];
+
+    protected $hidden = [
         self::COLUMN_ID,
         self::COLUMN_CREATED_AT,
         self::COLUMN_UPDATED_AT,
