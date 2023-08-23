@@ -19,7 +19,7 @@ class FullNameCast implements CastsAttributes
 
     public function set($model, $key, $value, $attributes): string
     {
-        if (! $value instanceof FullName) {
+        if (!$value instanceof FullName) {
             throw new InvalidArgumentException('The given value is not a FullName instance.');
         }
 

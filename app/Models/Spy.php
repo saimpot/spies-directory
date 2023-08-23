@@ -96,7 +96,7 @@ class Spy extends Model
 
     protected $casts = [
         self::COLUMN_FULL_NAME => FullNameCast::class,
-        self::COLUMN_AGE => AgeCast::class,
+        self::COLUMN_AGE       => AgeCast::class,
     ];
 
     protected $hidden = [

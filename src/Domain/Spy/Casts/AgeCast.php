@@ -13,7 +13,6 @@ use Prosperty\Core\Domain\Spy\ValueObjects\Age;
 
 class AgeCast implements CastsAttributes
 {
-
     public function get(Model $model, string $key, mixed $value, array $attributes): string
     {
         return (new Age(
@@ -24,7 +23,7 @@ class AgeCast implements CastsAttributes
 
     public function set(Model $model, string $key, mixed $value, array $attributes): string
     {
-        if (! $value instanceof Age) {
+        if (!$value instanceof Age) {
             throw new InvalidArgumentException('The given value is not an Age instance.');
         }
 
